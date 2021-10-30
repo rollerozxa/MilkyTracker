@@ -104,6 +104,7 @@ add_executable(tracker
     Undo.cpp
     VRand.cpp
     Zapper.cpp
+    discord.cpp
 
     # Headers
     ${PROJECT_BINARY_DIR}/src/tracker/version.h
@@ -185,6 +186,7 @@ add_executable(tracker
     Undo.h
     VRand.h
     Zapper.h
+    discord.h
 )
 
 # Set target name for the executable
@@ -355,6 +357,10 @@ endif()
 
 if(ZLIB_FOUND)
     target_link_libraries(tracker ${ZLIB_LIBRARIES})
+endif()
+
+if(DISCORD_FOUND)
+    target_link_libraries(tracker ${DISCORD_LIBRARIES})
 endif()
 
 if(UNIX)

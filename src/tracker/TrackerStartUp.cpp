@@ -38,6 +38,8 @@
 #include "SystemMessage.h"
 #include "version.h"
 
+#include "discord.h"
+
 // Logo picture
 #if defined(__EXCLUDE_BIGLOGO__) || defined(__LOWRES__)
 	#include "LogoSmall.h"
@@ -223,6 +225,14 @@ void Tracker::startUp(bool forceNoSplash/* = false*/)
 
 	// try to start playback engine
 	bool masterStart = playerMaster->start();	
+	
+	// init discord rpc
+	g_discord = Discord::createDiscordSingleton();
+	g_discord->init();
+	
+	g_discord->setDetails("No file opened.");
+	g_discord->setState("");
+	g_discord->updatePresence();
 	
 	// remove splash screen
 	if (!noSplash)

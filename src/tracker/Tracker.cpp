@@ -64,6 +64,8 @@
 
 #include "InputControlListener.h"
 
+#include "discord.h"
+
 // Some helper messageboxes & button handlers
 #include "DialogHandlers.h"
 #include "DialogChannelSelector.h"
@@ -2661,6 +2663,13 @@ bool Tracker::finishLoading()
 		screen->paint();
 		updateWindowTitle(moduleEditor->getModuleFileName());
 	}
+	
+	PPString blarg = PPString("Playing: ");
+	blarg.append(moduleEditor->getModuleFileName());
+	
+	g_discord->setDetailsPP(blarg);
+	g_discord->setState("");
+	g_discord->updatePresence();
 	
 	if (!loadingParameters.res && !loadingParameters.abortLoading)
 		showMessageBox(MESSAGEBOX_UNIVERSAL, loadingParameters.lastError, MessageBox_OK);	
